@@ -1,1 +1,10 @@
 # bubblediff
+
+
+
+## 
+
+## Todo
+
+- [ ] Github OAuth
+- [ ] 
