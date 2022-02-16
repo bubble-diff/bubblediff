@@ -1,3 +1,6 @@
+# Config file
+config.json
+
 # IDE
 .vscode/
 .idea/
@@ -6,6 +9,8 @@
 .DS_Store
 
 # Binaries for programs and plugins
+bubblediff
+output/
 *.exe
 *.exe~
 *.dll
