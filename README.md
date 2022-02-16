@@ -6,5 +6,4 @@
 
 ## Todo
 
-- [ ] Github OAuth
-- [ ] 
+- [x] Github OAuth
