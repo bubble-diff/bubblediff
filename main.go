@@ -3,13 +3,13 @@ package main
 import (
 	"log"
 
+	"github.com/bubble-diff/bubblediff/app"
 	"github.com/bubble-diff/bubblediff/config"
-	"github.com/bubble-diff/bubblediff/db"
 )
 
 func main() {
 	conf := config.Get()
-	err := db.Init()
+	err := app.Init()
 	if err != nil {
 		log.Fatal(err)
 	}

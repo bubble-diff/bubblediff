@@ -14,12 +14,19 @@ type Config struct {
 	ListenAddr   string `json:"listen_addr"`
 	ClientId     string `json:"client_id"`
 	ClientSecret string `json:"client_secret"`
-	WebAddress   string `json:"web_address"`
-	MongoUrl     string `json:"mongo_url"`
-	Redis        struct {
+	BubblediffUi string `json:"bubblediff_ui"`
+	Mongo        struct {
+		Url         string `json:"url"`
+		Collections struct {
+			User string `json:"user"`
+			Task string `json:"task"`
+		} `json:"collections"`
+	} `json:"mongo"`
+	Redis struct {
 		Addr     string `json:"addr"`
 		Password string `json:"password"`
 	} `json:"redis"`
+	Env string `json:"env"`
 }
 
 var globalConfig Config

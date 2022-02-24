@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 
-	"github.com/bubble-diff/bubblediff/db"
+	"github.com/bubble-diff/bubblediff/app"
 	"github.com/bubble-diff/bubblediff/models"
 )
 
@@ -30,8 +30,7 @@ func GetUser(c *gin.Context) {
 
 func getUserFromMongodb(uid int) (user *models.User, err error) {
 	user = new(models.User)
-	coll := db.Mongodb.Database("bubblediff_test").Collection("user")
-	err = coll.FindOne(context.Background(), bson.D{{"id", uid}}).Decode(&user)
+	err = app.UserColl.FindOne(context.Background(), bson.D{{"id", uid}}).Decode(&user)
 	if err != nil {
 		return nil, err
 	}
