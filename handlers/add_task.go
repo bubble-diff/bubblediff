@@ -34,6 +34,8 @@ func AddTask(c *gin.Context) {
 }
 
 func addTask(c *gin.Context, task *models.Task) (id int64, err error) {
+	// todo: 对task进行数据检查
+
 	id, err = app.IDGenerate(c, "task")
 	if err != nil {
 		return invalidID, err
