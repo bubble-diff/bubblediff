@@ -16,11 +16,16 @@ func GetTaskDetailByName(c *gin.Context) {
 	task, err := getTaskDetailByName(c, taskname)
 	if err != nil {
 		log.Printf("get task by %s failed, %s", taskname, err)
-		c.JSON(500, gin.H{
-			"err": err.Error(),
+		c.JSON(200, gin.H{
+			"err":  err.Error(),
+			"task": nil,
 		})
+		return
 	}
-	c.JSON(200, task)
+	c.JSON(200, gin.H{
+		"err":  "",
+		"task": task,
+	})
 }
 
 func getTaskDetailByName(ctx context.Context, name string) (task *models.Task, err error) {
