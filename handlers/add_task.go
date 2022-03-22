@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -16,20 +15,27 @@ func AddTask(c *gin.Context) {
 	task := new(models.Task)
 	err := c.BindJSON(task)
 	if err != nil {
-		c.JSON(500, gin.H{
-			"msg": fmt.Sprintf("unmarshal json failed, %s", err),
+		log.Printf("unmarshal json failed, %s", err)
+		c.JSON(200, gin.H{
+			"err": err.Error(),
+			"id":  invalidID,
 		})
+		return
 	}
 
 	id, err := addTask(c, task)
 	if err != nil {
-		c.JSON(500, gin.H{
-			"msg": fmt.Sprintf("add task failed, %s", err),
+		log.Printf("add task failed, %s", err)
+		c.JSON(200, gin.H{
+			"err": err.Error(),
+			"id":  invalidID,
 		})
+		return
 	}
 
 	c.JSON(200, gin.H{
-		"id": id,
+		"err": nil,
+		"id":  id,
 	})
 }
 
