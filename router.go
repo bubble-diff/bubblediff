@@ -29,7 +29,7 @@ func InitRouter() (r *gin.Engine, err error) {
 		_task.GET("/:id", handlers.GetTaskDetailByID)
 		_task.POST("", handlers.AddTask)
 		_task.DELETE("/:id")
-		_task.PUT("/:id")
+		_task.PUT("/:id", handlers.UpdateTaskHandler.UpdateTask)
 		_task.GET("/searchByName", handlers.GetTaskDetailByName)
 
 		// 任务列表api
