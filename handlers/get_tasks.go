@@ -32,12 +32,15 @@ func GetTasks(c *gin.Context) {
 	tasks, err := getTasks(c, owner, search)
 	if err != nil {
 		log.Printf("get tasks failed, %s", err)
-		c.JSON(500, gin.H{
-			"error": err.Error(),
+		c.JSON(200, gin.H{
+			"err":         err.Error(),
+			"tasks":       nil,
+			"total_count": 0,
 		})
+		return
 	}
-	log.Printf("tasks:\n%+v", tasks)
 	c.JSON(200, gin.H{
+		"err":         "",
 		"tasks":       tasks,
 		"total_count": len(tasks),
 	})
