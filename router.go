@@ -19,20 +19,26 @@ func InitRouter() (r *gin.Engine, err error) {
 	r.GET("/ping", handlers.Ping)
 	// 登录相关
 	r.GET("/login", JwtAuthMws.LoginHandler)
-	// API 开放接口
+	// RESTful API 开放接口
 	// API接口仅在登录态有权限调用
 	_apiv1 := r.Group("/api/v1")
 	_apiv1.Use(JwtAuthMws.MiddlewareFunc())
 	{
-		// Diff任务curd
+		// 任务详情 curd api
 		_task := _apiv1.Group("/task")
-		_task.POST("/add")
-		_task.POST("/delete")
-		_task.GET("/get")
-		_task.POST("/update")
-		// User curd
-		_user := _apiv1.Group("/user")
-		_user.GET("/get", handlers.GetUser)
+		_task.GET("/:id", handlers.GetTaskDetailByID)
+		_task.POST("", handlers.AddTask)
+		_task.DELETE("/:id")
+		_task.PUT("/:id", handlers.UpdateTaskHandler.UpdateTask)
+		_task.GET("/searchByName", handlers.GetTaskDetailByName)
+
+		// 任务列表api
+		_tasks := _apiv1.Group("/tasks")
+		_tasks.GET("", handlers.GetTasks)
+
+		// 查询当前请求用户的个人信息
+		_user := _apiv1.Group("/userinfo")
+		_user.GET("", handlers.GetUser)
 	}
 	return r, nil
 }

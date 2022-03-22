@@ -1,9 +1,3 @@
-.EXPORT_ALL_VARIABLES:
-
-http_proxy=http://127.0.0.1:1087
-https_proxy=http://127.0.0.1:1087
-ALL_PROXY=socks5://127.0.0.1:1080
-
 clean:
 	@echo "clean output directory..."
 	@rm -rf output/
@@ -16,3 +10,9 @@ build:
 
 run: build
 	@cd output && ./bubblediff
+
+proxy-run: build
+	@export http_proxy=http://127.0.0.1:1087;\
+	export https_proxy=http://127.0.0.1:1087;\
+	export ALL_PROXY=socks5://127.0.0.1:1080;\
+    cd output && ./bubblediff

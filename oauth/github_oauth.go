@@ -14,8 +14,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/options"
 
+	"github.com/bubble-diff/bubblediff/app"
 	"github.com/bubble-diff/bubblediff/config"
-	"github.com/bubble-diff/bubblediff/db"
 	"github.com/bubble-diff/bubblediff/models"
 )
 
@@ -128,7 +128,6 @@ func getUser(token string) (user *models.User, err error) {
 func upsertUser(user *models.User) (err error) {
 	log.Printf("upsert user:\n%+v", user)
 	ctx := context.Background()
-	coll := db.Mongodb.Database("bubblediff_test").Collection("user")
 
 	filter := bson.D{{"id", user.ID}}
 	update := bson.D{
@@ -139,7 +138,7 @@ func upsertUser(user *models.User) (err error) {
 		}},
 	}
 	opts := options.Update().SetUpsert(true)
-	_, err = coll.UpdateOne(ctx, filter, update, opts)
+	_, err = app.UserColl.UpdateOne(ctx, filter, update, opts)
 	if err != nil {
 		log.Printf("updateOne failed, %s", err)
 		return err
