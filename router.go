@@ -26,7 +26,7 @@ func InitRouter() (r *gin.Engine, err error) {
 	{
 		// 任务详情 curd api
 		_task := _apiv1.Group("/task")
-		_task.GET("/:id")
+		_task.GET("/:id", handlers.GetTaskDetailByID)
 		_task.POST("", handlers.AddTask)
 		_task.DELETE("/:id")
 		_task.PUT("/:id")

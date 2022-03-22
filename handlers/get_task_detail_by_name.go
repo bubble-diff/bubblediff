@@ -15,7 +15,7 @@ func GetTaskDetailByName(c *gin.Context) {
 	taskname := c.Query("name")
 	task, err := getTaskDetailByName(c, taskname)
 	if err != nil {
-		log.Printf("get task by %s failed, %s", taskname, err)
+		log.Printf("get task by name=%s failed, %s", taskname, err)
 		c.JSON(200, gin.H{
 			"err":  err.Error(),
 			"task": nil,
