@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 
@@ -25,29 +24,33 @@ func (h *updateTaskHandler) UpdateTask(c *gin.Context) {
 	id := c.Param("id")
 	taskid, err := strconv.ParseInt(id, 10, 64)
 	if err != nil {
-		c.JSON(500, gin.H{
-			"msg": fmt.Sprintf("parse taskid=%s failed, %s", id, err),
+		log.Printf("parse taskid=%s failed, %s", id, err)
+		c.JSON(200, gin.H{
+			"err": err.Error(),
 		})
 		return
 	}
 
 	err = c.BindJSON(h)
 	if err != nil {
-		c.JSON(500, gin.H{
-			"msg": fmt.Sprintf("unmarshal json failed, %s", err),
+		log.Printf("unmarshal json failed, %s", err)
+		c.JSON(200, gin.H{
+			"err": err.Error(),
 		})
 		return
 	}
 
 	err = h.updateTask(c, taskid)
 	if err != nil {
-		c.JSON(500, gin.H{
-			"msg": fmt.Sprintf("update task failed, %s", err),
+		log.Printf("update task failed, %s", err)
+		c.JSON(200, gin.H{
+			"err": err.Error(),
 		})
+		return
 	}
 
 	c.JSON(200, gin.H{
-		"id": id,
+		"err": nil,
 	})
 }
 
