@@ -3,6 +3,7 @@ package config
 import (
 	"encoding/json"
 	"io/ioutil"
+	"log"
 )
 
 const (
@@ -35,6 +36,7 @@ var globalConfig Config
 func init() {
 	b, err := ioutil.ReadFile(Path)
 	if err != nil {
+		log.Printf("No config.json? Use config.json.example to create one.")
 		panic(err)
 	}
 	err = json.Unmarshal(b, &globalConfig)
