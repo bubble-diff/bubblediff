@@ -14,6 +14,7 @@ type Config struct {
 	ListenAddr   string `json:"listen_addr"`
 	ClientId     string `json:"client_id"`
 	ClientSecret string `json:"client_secret"`
+	// BubblediffUi 用于允许跨域访问
 	BubblediffUi string `json:"bubblediff_ui"`
 	Mongo        struct {
 		Url         string `json:"url"`
