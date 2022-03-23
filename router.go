@@ -28,7 +28,7 @@ func InitRouter() (r *gin.Engine, err error) {
 		_task := _apiv1.Group("/task")
 		_task.GET("/:id", handlers.GetTaskDetailByID)
 		_task.POST("", handlers.AddTask)
-		_task.DELETE("/:id")
+		_task.DELETE("/:id", handlers.DeleteTaskHandler.DeleteTask)
 		_task.PUT("/:id", handlers.UpdateTaskHandler.UpdateTask)
 		_task.GET("/searchByName", handlers.GetTaskDetailByName)
 
