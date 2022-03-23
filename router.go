@@ -32,6 +32,10 @@ func InitRouter() (r *gin.Engine, err error) {
 		_task.PUT("/:id", handlers.UpdateTaskHandler.UpdateTask)
 		_task.GET("/searchByName", handlers.GetTaskDetailByName)
 
+		// 开始diff任务 api
+		_task.GET("/:id/start", handlers.StartTaskHandler.StartTask)
+		_task.GET("/:id/stop", handlers.StopTaskHandler.StopTask)
+
 		// 任务列表api
 		_tasks := _apiv1.Group("/tasks")
 		_tasks.GET("", handlers.GetTasks)
