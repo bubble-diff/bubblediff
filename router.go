@@ -43,6 +43,14 @@ func InitRouter() (r *gin.Engine, err error) {
 		// 查询当前请求用户的个人信息
 		_user := _apiv1.Group("/userinfo")
 		_user.GET("", handlers.GetUser)
+
+		// Record记录 api
+		_record := _apiv1.Group("/records")
+		// 获取某个task的所有record meta信息
+		_record.GET("/:taskid", handlers.ListRecordsMeta)
+		// 获取特定记录详情
+		_record.GET("/:taskid/:recordid")
+
 	}
 	return r, nil
 }
