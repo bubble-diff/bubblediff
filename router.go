@@ -49,7 +49,7 @@ func InitRouter() (r *gin.Engine, err error) {
 		// 获取某个task的所有record meta信息
 		_record.GET("/:taskid", handlers.ListRecordsMeta)
 		// 获取特定记录详情
-		_record.GET("/:taskid/:recordid")
+		_record.GET("/:taskid/:recordid", handlers.GetRecordDetail)
 
 	}
 	return r, nil
