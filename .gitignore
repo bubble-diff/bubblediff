@@ -1,12 +1,12 @@
-# Config file
-config.json
-
 # IDE
 .vscode/
 .idea/
 
 # MacOS
 .DS_Store
+
+# Configuration
+conf/config.json
 
 # Binaries for programs and plugins
 bubblediff

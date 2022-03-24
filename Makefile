@@ -6,7 +6,7 @@ build:
 	@echo "build project..."
 	@mkdir -p output
 	@go build -o output/bubblediff
-	@cp config.json ./output
+	@cp conf/config.json ./output
 
 run: build
 	@cd output && ./bubblediff
