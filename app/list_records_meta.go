@@ -12,6 +12,7 @@ import (
 func ListRecordsMeta(ctx context.Context, taskid int64) (metas []*models.RecordMeta, err error) {
 	key := fmt.Sprintf("task%d_records_meta", taskid)
 	values, err := rdb.LRange(ctx, key, 0, -1).Result()
+	metas = make([]*models.RecordMeta, 0)
 	for _, val := range values {
 		meta := new(models.RecordMeta)
 		err = json.Unmarshal([]byte(val), meta)
