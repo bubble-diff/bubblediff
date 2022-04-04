@@ -3,6 +3,7 @@ package handlers
 import (
 	"log"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
@@ -66,6 +67,7 @@ func (h updateTaskHandler) updateTask(c *gin.Context, taskid int64) (err error) 
 				{Key: "traffic_config", Value: h.TrafficConfig},
 				{Key: "filter_config", Value: h.FilterConfig},
 				{Key: "advance_config", Value: h.AdvanceConfig},
+				{Key: "updated_time",Value: time.Now().Format("2006-01-02 15:04:05")},
 			},
 		},
 	}

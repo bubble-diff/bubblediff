@@ -10,6 +10,8 @@ import (
 )
 
 func ListRecordsMeta(c *gin.Context) {
+	path := c.Query("path")
+
 	taskid, err := strconv.ParseInt(c.Param("taskid"), 10, 64)
 	if err != nil {
 		log.Printf("[ListRecordsMeta] parse int failed, %s", err)
@@ -19,7 +21,8 @@ func ListRecordsMeta(c *gin.Context) {
 		})
 		return
 	}
-	metas, err := app.ListRecordsMeta(c, taskid)
+
+	metas, err := app.ListRecordsMeta(c, taskid, path)
 	if err != nil {
 		log.Printf("[ListRecordsMeta] get from redis failed, %s", err)
 		c.JSON(200, gin.H{

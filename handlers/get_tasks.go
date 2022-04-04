@@ -16,12 +16,12 @@ import (
 
 // taskPreview 任务概览
 type taskPreview struct {
-	ID       int64        `json:"id" bson:"id"`
-	Name     string       `json:"name" bson:"name"`
-	Owner    *models.User `json:"owner" bson:"owner"`
-	TotalReq int          `json:"total_req"`
-	SucRate  float64      `json:"suc_rate"`
-	DiffRate float64      `json:"diff_rate"`
+	ID            int64        `json:"id" bson:"id"`
+	Name          string       `json:"name" bson:"name"`
+	Owner         *models.User `json:"owner" bson:"owner"`
+	TotalRecord   int64        `json:"total_record" bson:"total_record"`
+	SuccessRecord int64        `json:"success_record" bson:"success_record"`
+	CreatedTime   string       `json:"created_time" bson:"created_time"`
 }
 
 // GetTasks 返回所有diff任务信息概要。
@@ -82,8 +82,6 @@ func getTasks(ctx context.Context, owner, search string) (tasks []taskPreview, e
 		if err != nil {
 			return nil, err
 		}
-		// todo: 从redis获取请求meta
-
 		tasks = append(tasks, preview)
 	}
 	if err = cur.Err(); err != nil {

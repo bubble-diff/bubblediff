@@ -16,8 +16,13 @@ type Task struct {
 	TrafficConfig *TrafficConfig `json:"traffic_config" bson:"traffic_config"`
 	FilterConfig  *FilterConfig  `json:"filter_config" bson:"filter_config"`
 	AdvanceConfig *AdvanceConfig `json:"advance_config" bson:"advance_config"`
+
+	// TotalRecord 流量回放的流量数
+	TotalRecord int64 `json:"total_record" bson:"total_record"`
+	// SuccessRecord 成功回放的流量数
+	SuccessRecord int64 `json:"success_record" bson:"success_record"`
 	// CreatedTime 任务创建时间
-	// CreatedTime int64
+	CreatedTime string `json:"created_time" bson:"created_time"`
 	// UpdatedTime 配置最后变更时间
-	// UpdatedTime int64
+	UpdatedTime string `json:"updated_time" bson:"updated_time"`
 }

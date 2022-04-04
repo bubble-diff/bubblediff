@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"log"
+	"time"
 
 	"github.com/gin-gonic/gin"
 
@@ -46,7 +47,11 @@ func addTask(c *gin.Context, task *models.Task) (id int64, err error) {
 	if err != nil {
 		return invalidID, err
 	}
+
 	task.ID = id
+	task.CreatedTime = time.Now().Format("2006-01-02 15:04:05")
+	task.UpdatedTime = task.CreatedTime
+
 	res, err := app.TaskColl.InsertOne(c, task)
 	if err != nil {
 		return invalidID, err

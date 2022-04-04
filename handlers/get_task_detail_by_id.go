@@ -33,6 +33,17 @@ func GetTaskDetailByID(c *gin.Context) {
 		})
 		return
 	}
+
+	task.TrafficConfig.OnlineAddr, err = app.GetOnlineAddr(c, taskid)
+	if err != nil {
+		log.Printf("get task online addr by id=%d failed, %s", taskid, err)
+		c.JSON(200, gin.H{
+			"err":  err.Error(),
+			"task": nil,
+		})
+		return
+	}
+
 	c.JSON(200, gin.H{
 		"err":  "",
 		"task": task,
