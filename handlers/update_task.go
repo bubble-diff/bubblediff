@@ -22,6 +22,8 @@ type updateTaskHandler struct {
 var UpdateTaskHandler = &updateTaskHandler{}
 
 func (h *updateTaskHandler) UpdateTask(c *gin.Context) {
+	h.clear()
+
 	id := c.Param("id")
 	taskid, err := strconv.ParseInt(id, 10, 64)
 	if err != nil {
@@ -58,10 +60,6 @@ func (h *updateTaskHandler) UpdateTask(c *gin.Context) {
 func (h updateTaskHandler) updateTask(c *gin.Context, taskid int64) (err error) {
 	// todo: 对task进行数据检查
 
-	if h.FilterConfig.HttpPathRegexFilter == nil {
-		h.FilterConfig.HttpPathRegexFilter = make([]string, 0)
-	}
-
 	filter := bson.D{{"id", taskid}}
 	update := bson.D{
 		{
@@ -83,4 +81,11 @@ func (h updateTaskHandler) updateTask(c *gin.Context, taskid int64) (err error) 
 
 	log.Printf("update task ok, taskid: %d, result: %+v", taskid, result)
 	return nil
+}
+
+func (h *updateTaskHandler) clear() {
+	h.Description = ""
+	h.AdvanceConfig = nil
+	h.FilterConfig = nil
+	h.TrafficConfig = nil
 }
