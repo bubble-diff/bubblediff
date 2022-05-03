@@ -58,6 +58,10 @@ func (h *updateTaskHandler) UpdateTask(c *gin.Context) {
 func (h updateTaskHandler) updateTask(c *gin.Context, taskid int64) (err error) {
 	// todo: 对task进行数据检查
 
+	if h.FilterConfig.HttpPathRegexFilter == nil {
+		h.FilterConfig.HttpPathRegexFilter = make([]string, 0)
+	}
+
 	filter := bson.D{{"id", taskid}}
 	update := bson.D{
 		{
@@ -67,7 +71,7 @@ func (h updateTaskHandler) updateTask(c *gin.Context, taskid int64) (err error) 
 				{Key: "traffic_config", Value: h.TrafficConfig},
 				{Key: "filter_config", Value: h.FilterConfig},
 				{Key: "advance_config", Value: h.AdvanceConfig},
-				{Key: "updated_time",Value: time.Now().Format("2006-01-02 15:04:05")},
+				{Key: "updated_time", Value: time.Now().Format("2006-01-02 15:04:05")},
 			},
 		},
 	}
